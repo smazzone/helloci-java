@@ -33,7 +33,7 @@ class HelloControllerTest {
   void helloEndpointReturnsCustomMessage() throws Exception {
     mvc.perform(get("/"))
        .andExpect(status().isOk())
-       .andExpect(content().string("Hello, Harness CI on Cloud!")); // adjust if your controller returns something else
+       .andExpect(content().string("Hello, Harness CI on Cloud!"));
   }
 
   @Test
