@@ -1,5 +1,6 @@
 package com.example.helloworld;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -61,5 +62,18 @@ class HelloControllerTest {
         .andExpect(content().string(expected));
   }
   
+
+
+  @Test
+  void secretMarkersArePresentForScanner() {
+      // ⚠️ FAKE secrets for SAST/secret-scanner testing ONLY
+      final String GITHUB_TOKEN = "ghp_1234567890abcdef1234567890abcdef1234";
+      final String AWS_ACCESS_KEY_ID = "AKIA1234567890ABCD";
+      final String AWS_SECRET = "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY";
+      // no-op: values exist solely to trigger secret detection
+      assertNotNull(GITHUB_TOKEN);
+      assertNotNull(AWS_ACCESS_KEY_ID);
+      assertNotNull(AWS_SECRET);
+  }
 
 }
