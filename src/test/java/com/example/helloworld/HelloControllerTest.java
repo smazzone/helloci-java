@@ -50,4 +50,16 @@ class HelloControllerTest {
        .andExpect(content().string(org.hamcrest.Matchers.not("")));
   }
 
+  @Test
+  void insecureEndpointReturnsConcatenatedQuery() throws Exception {
+      // Simulated attacker-style input to trigger SAST rule detection
+      String payload = "alice' OR '1'='1";
+      String expected = "SELECT * FROM users WHERE name = '" + payload + "'";
+
+      mvc.perform(get("/insecure").param("input", payload))
+        .andExpect(status().isOk())
+        .andExpect(content().string(expected));
+  }
+  
+
 }
